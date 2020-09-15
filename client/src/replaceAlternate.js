@@ -6,7 +6,8 @@ export function replaceAlternateArtCards(cardsListJson, replacementMap) {
         if (typeof replacementMap[cardId] !== 'undefined') {
             cardsListJson = replaceCardKey(
                 cardsListJson, 
-                { oldKey: cardId, newKey: replacementMap[cardId] }
+                { oldKey: cardId, newKey: replacementMap[cardId] },
+                4 // maximum value for the replaced set of cards
             );
         }
     }
