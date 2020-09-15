@@ -64,11 +64,7 @@ const Sounds = {
 	readyCheck: new Audio("sound/drop_003.ogg"),
 };
 
-// TODO: Replace this with an actual real list of IDs to replace
-const AlternateCards = {
-	"67518": "yyyyy" /* Teferi, Hero of Dominaria DOM */,
-	"68674": "xxxxx" /* Vraska, Golgari Queen GRN */
-}
+import { AlternateArtCardReplacements } from "./data/constants.json";
 
 Vue.use(VTooltip);
 VTooltip.options.defaultPlacement = "bottom-start";
@@ -1372,8 +1368,7 @@ export default {
 						const collJson = JSON.parse(collStr)["payload"];
 						// for (let c of Object.keys(collJson).filter((c) => !(c in
 						// Cards))) console.log(c, " not found.");
-						const collClean = replaceAlternateArtCards(collJson, AlternateCards);
-						return collClean;
+						return replaceAlternateArtCards(collJson, AlternateArtCardReplacements);
 					} catch (e) {
 						Swal.fire({
 							icon: "error",

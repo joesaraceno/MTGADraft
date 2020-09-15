@@ -120,17 +120,19 @@ export function replaceCardKey(oldObj, replacementMap, maximumNewValue) {
 				if (typeof maximumNewValue !== 'undefined' && newCount > maximumNewValue) {
 					newCount = maximumNewValue;
 				}
+				copy[newKey] = newCount;
 			}
-			console.log(`key replaced ${Object.getOwnPropertyNames(copy).find(name => name === oldKey)} is now ${newKey}`)
-			delete copy[oldKey]
+			console.log(`key replaced ${Object.getOwnPropertyNames(copy).find(name => name === oldKey)} is now ${newKey}`);
+			delete copy[oldKey];
 		} else {
-			console.error(`key already existed for copy[${newKey}] with value of ${copy[newKey]} or didn't exist on original object`)
-			throw new Error()
+			console.error(`key already existed for copy[${newKey}] with value of ${copy[newKey]} or didn't exist on original object`);
+			throw new Error();
 		}
 		return copy;
-	
 	} catch (e) {
-		console.error("error replacing key or value in object", e)
-		throw e
+		console.error("error replacing key or value in object", e);
+		throw e;
 	}
 }
+
+

@@ -124,5 +124,10 @@
 			"filename": "JiRockHistoricCube33.txt",
 			"description": "Jean-Emmanuel Depraz (JiRock) Historic Cube updated for Jumpstart."
 		}
-	]
+	],
+	"AlternateArtCardReplacements": {
+		"69451": 67518,
+		"69450": 68674,
+		"69449": 68656 
+	}
 }
