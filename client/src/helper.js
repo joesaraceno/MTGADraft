@@ -105,3 +105,31 @@ export function download(filename, text) {
 
 	document.body.removeChild(element);
 }
+
+export function replaceCardKey(oldObj, replacementMap) {
+	try {
+		const copy = clone(oldObj);
+		const { oldKey, newKey } = replacementMap; 
+		if (copy.hasOwnProperty(oldKey)) {
+			const oldValue = copy[oldKey];
+			if (!copy.hasOwnProperty(newKey)) {
+				copy[newKey] = oldValue;
+			} else {
+				// TODO: move the maxCount business logic elsewhere to make this reusable
+				let newCount = copy[newKey] += oldValue;
+				if (newCount > 4) {
+					newCount = 4;
+				}
+			}
+			console.log(`key replaced ${Object.getOwnPropertyNames(copy).find(name => name === oldKey)} is now ${newKey}`)
+			delete copy[oldKey]
+		} else {
+			console.error(`key already existed for copy[${newKey}] with value of ${copy[newKey]} or didn't exist on original object`)
+			throw new Error()
+		}
+		return copy;
+	
+	} catch (e) {
+		console.error("error replacing key or value in object", e)
+	}
+}
