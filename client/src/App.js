@@ -15,6 +15,7 @@ import { SwalCustomClasses, fireToast } from "./alerts.js";
 import { Cards, genCard, loadCards, addLanguage } from "./Cards.js";
 import exportToMTGA from "./exportToMTGA.js";
 import parseCardList from "../../src/parseCardList.js";
+import { replaceAlternateArtCards } from "./replaceAlternate.js";
 
 import Modal from "./components/Modal.vue";
 import Card from "./components/Card.vue";
@@ -62,6 +63,12 @@ const Sounds = {
 	countdown: new Audio("sound/click_001.ogg"),
 	readyCheck: new Audio("sound/drop_003.ogg"),
 };
+
+// TODO: Replace this with an actual real list of IDs to replace
+const AlternateCards = {
+	"67518": "yyyyy" /* Teferi, Hero of Dominaria DOM */,
+	"68674": "xxxxx" /* Vraska, Golgari Queen GRN */
+}
 
 Vue.use(VTooltip);
 VTooltip.options.defaultPlacement = "bottom-start";
@@ -1365,7 +1372,8 @@ export default {
 						const collJson = JSON.parse(collStr)["payload"];
 						// for (let c of Object.keys(collJson).filter((c) => !(c in
 						// Cards))) console.log(c, " not found.");
-						return collJson;
+						const collClean = replaceAlternateArtCards(collJson, AlternateCards);
+						return collClean;
 					} catch (e) {
 						Swal.fire({
 							icon: "error",
